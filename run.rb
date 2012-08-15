@@ -14,6 +14,7 @@ require './actors/wall'
 
 require './actors/tank'
 require './actors/soldier'
+require './actors/rocket'
 
 require 'pry'
 
@@ -31,7 +32,7 @@ def init_defenders(num_defenses = 5)
 end
 
 def init_attackers(num_attackers = 5)
-  @spawner   = PolySpawner.for Tank, Soldier
+  @spawner   = PolySpawner.for Tank, Soldier, Rocket
   @attackers = (0..num_attackers).map { @spawner.spawn }
 end
 
@@ -41,9 +42,12 @@ end
 # Defenses:
 # ---------
 # 
-# [ 1] trap
-# [ 2] turret
-# [ 3] trap
+# [ 1] wall     ||
+# [ 2] wall     ||
+# [ 3] wall     ||
+# [ 4] trap     __
+# [ 5] wall     ||
+# [ 6] turret   |-
 #
 def defense_report(label = 'Defenses:')
   status_report(
@@ -59,9 +63,11 @@ end
 # Attackers:
 # ----------
 # 
-# [ 1] trap
-# [ 2] turret
-# [ 3] trap
+# [12] soldiers /\
+# [13] tank     oo
+# [14] tank     oo
+# [15] tank     oo
+# [16] soldiers /\
 #
 def offense_report(label = 'Attackers:')
   status_report(
@@ -71,6 +77,11 @@ def offense_report(label = 'Attackers:')
   )
 end
 
+# Attack!
+def execute_attack
+  
+end
+
 # Initialize game state
 init_defenders 10
 init_attackers 5
@@ -78,6 +89,10 @@ init_attackers 5
 # Report game state
 defense_report
 offense_report
+
+# Execute attacks
+3.times { execute_attack }
+
 
 # Pry it open, as desired
 binding.pry if ARGV[0] == 'pry'
