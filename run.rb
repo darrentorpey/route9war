@@ -77,9 +77,28 @@ def offense_report(label = 'Attackers:')
   )
 end
 
+def battle_status_report(round_number)
+  defense_report
+  offense_report
+end
+
 # Attack!
 def execute_attack
-  
+  attacker = @attackers.sample
+  defender = @defenders.sample
+  $logger.log "Battle: #{attacker.unique_id} vs. #{defender.unique_id}"
+
+  defender.health -= attacker.power
+  if defender.health <= 0
+    $logger.log 'Attacker won!'
+    @defenders.delete defender
+  else
+    attacker.health -= defender.power
+    if attacker.health <= 0
+      @attackers.delete attacker
+      $logger.log 'Defender won!'
+    end
+  end
 end
 
 # Initialize game state
@@ -87,11 +106,23 @@ init_defenders 10
 init_attackers 5
 
 # Report game state
+$logger.log '~' * 80
+$logger.log 'Starting board' 
+$logger.spacer
 defense_report
 offense_report
 
 # Execute attacks
-3.times { execute_attack }
+(1..10).to_a.each do |round|
+  $logger.log '~' * 80 
+  $logger.log "Round #{round}:"
+  $logger.spacer
+  execute_attack
+  $logger.spacer
+  battle_status_report round + 1
+  puts ''
+end
+
 
 
 # Pry it open, as desired

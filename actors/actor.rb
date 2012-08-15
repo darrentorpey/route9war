@@ -40,7 +40,7 @@ class Actor
   end
 
   def unique_id
-    "[#{actor_id}] #{actor_full_symbol}"
+    "#{actor_name} [#{actor_id}]"
   end
 
   def list_name(options = {})

@@ -31,4 +31,8 @@ class Logger
   def self.debug(text)
     log text if @@log_level >= LEVEL_MAP[:debug]
   end
+
+  def self.spacer
+    log ''
+  end
 end
