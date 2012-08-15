@@ -1,3 +1,3 @@
 class Trap < Actor
-  def actor_type; '__  trap  __'; end
+  is_actor name: 'trap', symbol: '__'
 end

@@ -1,3 +1,3 @@
 class Soldier < Actor
-  def actor_type; '/\\ soldier /\\'; end
+  is_actor name: 'soldiers', symbol: '/\\'
 end

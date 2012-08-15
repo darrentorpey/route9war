@@ -37,9 +37,9 @@ end
 
 # Example:
 # 
-# ========
-# Defenses
-# --------
+# =========
+# Defenses:
+# ---------
 # 
 # [ 1] trap
 # [ 2] turret
@@ -55,9 +55,9 @@ end
 
 # Example:
 # 
-# ========
-# Defenses
-# --------
+# ==========
+# Attackers:
+# ----------
 # 
 # [ 1] trap
 # [ 2] turret
@@ -72,7 +72,7 @@ def offense_report(label = 'Attackers:')
 end
 
 # Initialize game state
-init_defenders 20
+init_defenders 10
 init_attackers 5
 
 # Report game state

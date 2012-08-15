@@ -1,3 +1,3 @@
 class Wall < Actor
-  def actor_type; '||  wall  ||'; end
+  is_actor name: 'wall', symbol: '||'
 end

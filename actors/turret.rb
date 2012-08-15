@@ -1,3 +1,3 @@
 class Turret < Actor
-  def actor_type; '-| turret |-'; end
+  is_actor name: 'turret', symbol: '|-'
 end

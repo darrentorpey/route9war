@@ -8,19 +8,33 @@ class Actor
     self.actor_id = @@num_actors
   end
 
-  def actor_type
+  def actor_name
     self.class.to_s.downcase
   end
 
+  def actor_symbol
+    '..'
+  end
+
+  def actor_full_symbol
+    "#{actor_symbol}  #{actor_name}  #{actor_symbol}"
+  end
+
   def unique_id
-    "[#{actor_id}] #{actor_type}"
+    "[#{actor_id}] #{actor_full_symbol}"
   end
 
   def list_name(options = {})
     options.reverse_merge!({
-      num_id_cols: 4,
-      filler:      ' '
+      num_id_cols:   4,
+      num_name_cols: 8,
+      filler:        ' '
     })
-    "[#{options[:filler] * ([0, options[:num_id_cols] - actor_id.to_s.size].max)}#{actor_id}] #{actor_type}"
+    "[#{options[:filler] * ([0, options[:num_id_cols] - actor_id.to_s.size].max)}#{actor_id}] #{actor_name}#{' ' * ([0, options[:num_name_cols] - actor_name.size].max)} #{actor_symbol}"
+  end
+
+  def self.is_actor(opts = {})
+    define_method(:actor_name) { opts[:name] }
+    define_method(:actor_symbol) { opts[:symbol] }
   end
 end
