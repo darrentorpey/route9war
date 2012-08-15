@@ -21,6 +21,6 @@ class Actor
       num_id_cols: 4,
       filler:      ' '
     })
-    "[#{options[:filler] * (options[:num_id_cols] - actor_id.to_s.size)}#{actor_id}] #{actor_type}"
+    "[#{options[:filler] * ([0, options[:num_id_cols] - actor_id.to_s.size].max)}#{actor_id}] #{actor_type}"
   end
 end

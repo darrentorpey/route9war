@@ -3,6 +3,7 @@ class PolySpawner < Spawner
 
   def initialize(*actor_classes)
     self.actor_classes = actor_classes
+    $logger.debug "<< Poly Spawner for #{actor_classes.to_sentence} >>"
   end
 
   def actor_class
