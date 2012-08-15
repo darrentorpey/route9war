@@ -1,0 +1,2 @@
+class Turret < Actor
+end
