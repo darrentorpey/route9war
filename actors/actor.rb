@@ -1,9 +1,9 @@
 class Actor
   @@num_actors = 0
-  @max_health = 10
+  @max_health  = 10
+  @power       = 0
 
-  attr_accessor  :actor_id
-  attr_accessor  :health
+  attr_accessor  :actor_id, :health
 
   def initialize
     @@num_actors += 1
@@ -13,6 +13,14 @@ class Actor
 
   def self.max_health
     @max_health
+  end
+
+  def power
+    self.class.power
+  end
+
+  def self.power
+    @power
   end
 
   def actor_name
@@ -41,10 +49,9 @@ class Actor
       num_name_cols: 8,
       filler:        ' '
     })
-    "[#{options[:filler] * ([0, options[:num_id_cols] - actor_id.to_s.size].max)}#{actor_id}] #{actor_name}#{' ' * ([0, options[:num_name_cols] - actor_name.size].max)} #{actor_symbol}  #{health_report}"
+    "[#{options[:filler] * ([0, options[:num_id_cols] - actor_id.to_s.size].max)}#{actor_id}] #{actor_name}#{' ' * ([0, options[:num_name_cols] - actor_name.size].max)} #{actor_symbol}  P:#{power}  H:#{health_report}"
   end
 
-  protected
   def self.is_actor(opts = {})
     opts.reverse_merge!(
       max_health: 10
@@ -52,5 +59,6 @@ class Actor
     define_method(:actor_name) { opts[:name] }
     define_method(:actor_symbol) { opts[:symbol] }
     @max_health = opts[:max_health]
+    @power = opts[:power]
   end
 end
