@@ -22,7 +22,7 @@ class Spawner
     end
     self.allowance -= the_spawned.cost
     $logger.debug "the_spawned: #{the_spawned.inspect} [#{the_spawned.cost}]"
-    $logger.log "Allowance now #{self.allowance}"
+    $logger.debug "Allowance now #{self.allowance}"
     the_spawned
   end
 end

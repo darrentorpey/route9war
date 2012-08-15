@@ -27,7 +27,6 @@ def init_defenders(allowance)
   while @spawner.allowance > 0
     @defenders.push @spawner.spawn
   end
-  # (0..num_defenses).map { @spawner.spawn }
   $logger.debug "Defenders initialized."
 end
 
@@ -92,11 +91,11 @@ def declare_victor(victor_name)
   message = "#{victor_name} win!"
   decor_1 = '=' * message.size
   decor_2 = '~' * message.size
-  $logger.log decor_1
-  $logger.log decor_2
-  $logger.log message
-  $logger.log decor_2
-  $logger.log decor_1
+  $logger.log "|| #{decor_1} ||"
+  $logger.log "|| #{decor_2} ||"
+  $logger.log "|| #{message} ||"
+  $logger.log "|| #{decor_2} ||"
+  $logger.log "|| #{decor_1} ||"
   $logger.spacer
 end
 
@@ -104,9 +103,6 @@ end
 def execute_attack
   attacker = @attackers.sample
   defender = @defenders.sample
-
-  $logger.debug "@attackers #{@attackers.inspect}"
-  $logger.debug "@defenders #{@defenders.inspect}"
 
   $logger.log "Battle: #{attacker.unique_id} vs. #{defender.unique_id}"
 
