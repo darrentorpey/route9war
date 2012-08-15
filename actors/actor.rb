@@ -1,9 +1,11 @@
 class Actor
   @@num_actors = 0
   @max_health  = 10
-  @power       = 0
+  @power       = 1
+  @cost        = 1
 
   attr_accessor  :actor_id, :health
+  # cattr_reader  @cost
 
   def initialize
     @@num_actors += 1
@@ -11,16 +13,24 @@ class Actor
     self.health   = self.class.max_health
   end
 
+  def self.cost
+    @cost
+  end
+
+  def cost
+    self.class.cost
+  end
+
   def self.max_health
     @max_health
   end
 
-  def power
-    self.class.power
-  end
-
   def self.power
     @power
+  end
+
+  def power
+    self.class.power
   end
 
   def actor_name
@@ -60,5 +70,6 @@ class Actor
     define_method(:actor_symbol) { opts[:symbol] }
     @max_health = opts[:max_health]
     @power = opts[:power]
+    @cost  = opts[:cost] || 1
   end
 end

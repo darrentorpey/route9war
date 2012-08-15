@@ -18,22 +18,27 @@ require './actors/rocket'
 
 require 'pry'
 
-def Logger(log_level)
-  $logger = Logger
-  $logger.set_log_level log_level
-  $logger
-end
-
 $logger = Logger :error #:debug
 
-def init_defenders(num_defenses = 5)
-  @spawner   = PolySpawner.for Turret, Trap, Wall
-  @defenders = (0..num_defenses).map { @spawner.spawn }
+def init_defenders(allowance)
+  $logger.debug "Initializing defenders..."
+  @spawner   = PolySpawner.for Turret, Trap, Wall, allowance: allowance
+  @defenders = []
+  while @spawner.allowance > 0
+    @defenders.push @spawner.spawn
+  end
+  # (0..num_defenses).map { @spawner.spawn }
+  $logger.debug "Defenders initialized."
 end
 
-def init_attackers(num_attackers = 5)
-  @spawner   = PolySpawner.for Tank, Soldier, Rocket
-  @attackers = (0..num_attackers).map { @spawner.spawn }
+def init_attackers(allowance)
+  $logger.debug "Initializing attackers..."
+  @spawner   = PolySpawner.for Tank, Soldier, Rocket, allowance: allowance
+  @attackers = []
+  while @spawner.allowance > 0
+    @attackers.push @spawner.spawn
+  end
+  $logger.debug "Attackers initialized."
 end
 
 # Example:
@@ -125,8 +130,8 @@ def execute_attack
 end
 
 # Initialize game state
-init_defenders 12
-init_attackers 4
+init_defenders 100
+init_attackers 50
 
 # Report startings game state
 $logger.log '~' * 80

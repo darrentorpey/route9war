@@ -36,3 +36,9 @@ class Logger
     log ''
   end
 end
+
+def Logger(log_level)
+  $logger = Logger
+  $logger.set_log_level log_level
+  $logger
+end

@@ -1,3 +1,3 @@
 class Wall < Actor
-  is_actor name: 'wall', symbol: '||', max_health: 30, power: 0
+  is_actor name: 'wall', symbol: '||', max_health: 10, power: 1, cost: 1
 end

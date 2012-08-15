@@ -1,3 +1,3 @@
 class Tank < Actor
-  is_actor name: 'tank', symbol: 'o__o', max_health: 10, power: 5
+  is_actor name: 'tank', symbol: 'o__o', max_health: 10, power: 5, cost: 20
 end
